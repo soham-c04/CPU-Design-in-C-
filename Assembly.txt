@@ -1,0 +1,39 @@
+# Assembly code for iteratively printing Fibonacci sequence upto n(x1 = 10) terms
+
+addi x1,x1,10
+beq x1, x0, done
+addi x3, x3, 1
+beq x1, x3, done
+addi x2, x0, 1
+addi x4, x4, 1
+for:
+beq x2, x1, done
+add x3, x4, x5
+add x5, x4, x0
+add x4, x3, x0
+addi x2, x2, 1
+jal x6, for
+done:
+sw x3,5(x31) # Store Fibonacci
+
+# Assembly code for printing and storing the sum of first n(x7 = 14) numbers 
+addi x30,x31,1
+addi x7,x7,14
+addi x8,x8,0
+
+for_loop:
+beq x7,x31,end_loop
+add x8,x8,x7
+sub x7,x7,x30
+jal x0,for_loop
+end_loop:
+sw x8,12(x31) # Store sum of first n numbers
+
+# Below lines are just for convenience
+addi x1,x1,0
+addi x1,x1,0
+addi x1,x1,0
+
+# Loading values
+lw x20,5(x31)
+lw x21,12(x31)
